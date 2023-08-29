@@ -24,20 +24,13 @@ Sampel yang digunakan dalam penelitian ini adalah [data harga penutupan saham Pe
 
 Berikut ringkasan dari data yang digunakan:
 ```
-      Date                 Open           High           Low           Close     
- Min.   :2004-10-01   Min.   : 830   Min.   : 880   Min.   : 820   Min.   : 855  
- 1st Qu.:2009-06-08   1st Qu.:1605   1st Qu.:1692   1st Qu.:1502   1st Qu.:1602  
- Median :2014-02-15   Median :2305   Median :2525   Median :2160   Median :2345  
- Mean   :2014-02-14   Mean   :2627   Mean   :2777   Mean   :2485   Mean   :2636  
- 3rd Qu.:2018-10-24   3rd Qu.:3780   3rd Qu.:3938   3rd Qu.:3570   3rd Qu.:3772  
- Max.   :2023-06-16   Max.   :4700   Max.   :4850   Max.   :4650   Max.   :4690  
-   Adj.Close          Volume         
- Min.   : 483.3   Min.   :1.610e+08  
- 1st Qu.:1089.8   1st Qu.:1.604e+09  
- Median :1741.7   Median :1.944e+09  
- Mean   :2091.5   Mean   :2.072e+09  
- 3rd Qu.:3126.9   3rd Qu.:2.417e+09  
- Max.   :4375.8   Max.   :5.838e+09
+      Waktu           Harga.Penutupan   
+ Min.   :2004-10-01   Min.   : 855
+ 1st Qu.:2009-06-08   1st Qu.:1602
+ Median :2014-02-15   Median :2345
+ Mean   :2014-02-14   Mean   :2636
+ 3rd Qu.:2018-10-24   3rd Qu.:3772 
+ Max.   :2023-06-16   Max.   :4690
 ```
 
 ## 2. Tahapan Penelitian ##
@@ -45,7 +38,7 @@ Berikut ringkasan dari data yang digunakan:
 flowchart TD;
     A[/ Data nilai saham TLKM/] --> B[Mengidentifikasi Kestasioneran Data]
     B --> C{Data Stasioner?}
-    C -->|Ya| D[Spesifikasi Model]
+    C -->|Iya| D[Spesifikasi Model]
     C -->|Tidak| E[Lakukan Differencing atau Transformasi]
     E --> B
     D --> F[Estimasi Parameter]
@@ -207,7 +200,7 @@ Berdasarkan plot yang diperoleh pada Gambar 6, dapat dilihat bahwa residual mode
   <i>Gambar 7 Plot Residual Data Harga Penutupan Saham TLKM</i>
 </p>
 
-Terdapat perbedaan hasil interpretasi antara histogram dan Q-Q plot, sehingga perlu dilakukan uji statistik untuk menguji normalitas data. Akan digunakan uji Normalitas Jarque-Bera (JB Test) untuk memastikan kenormalan residual model dengan replikasi sebanyak 1000. Diperoleh hasil pengujian sebagai berikut.
+Terdapat perbedaan hasil interpretasi antara histogram dan Q-Q plot, sehingga perlu dilakukan uji statistik untuk normalitas data. Akan digunakan uji Jarque-Bera (JB Test) untuk memastikan kenormalan residual model. Diperoleh hasil pengujian sebagai berikut.
 
 ```
 	Jarque Bera Test
@@ -268,7 +261,7 @@ Jun 2023             3198.054             4561.946
   <i>Gambar 8 Plot Nilai Aktual dan Nilai Forecast Harga Penutupan Saham TLKM</i>
 </p>
 
-Berdasarkan hasil forecasting yang didapatkan, terlihat bahwa seluruh nilai aktual berada pada interval kepercayaan 95%. Hal ini dapat disimpulkan bahwa model yang diajukan dapat memprediksi data Harga Penutupan Saham TLKM cukup baik.
+Berdasarkan hasil <i>forecasting</i> yang didapatkan, terlihat bahwa seluruh nilai aktual berada pada interval kepercayaan 95%. Hal ini dapat disimpulkan bahwa model yang diajukan dapat memprediksi data Harga Penutupan Saham TLKM cukup baik.
 
 | i | Absolute Error | Relative Error (%) |
 |:---:|:---:|:---:|
@@ -280,7 +273,7 @@ Berdasarkan hasil forecasting yang didapatkan, terlihat bahwa seluruh nilai aktu
 Berdasarkan tabel di atas, didapatkan Mean Absolute Error $=200$.
 
 ### 7.1. Ex Ante ###
-Selanjutnya dilakukan peramalan untuk meramal harga penutupan saham TLKM untuk 4 bulan ke depan yaitu bulan Juli 2023 – Oktober 2023. Berikut ini adalah hasil forecasting.
+Selanjutnya dilakukan peramalan untuk meramal harga penutupan saham TLKM untuk 4 bulan ke depan yaitu bulan Juli 2023 – Oktober 2023. Berikut ini adalah hasil <i>forecasting</i>.
 
 ```
          Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
@@ -298,18 +291,16 @@ Oct 2023           3970 3371.418 4657.764 3087.237 5061.612
 
 ## Kesimpulan ##
 1. Gambaran umum pada data harga penutupan saham PT. Telkom Indonesia (Persero) Tbk [TLKM] pada periode bulan Oktober 2004 sampai Juni 2023 (tanggal 16) yakni harga penutupan tertingginya yaitu Rp4.690,00 pada bulan Juli dan Agustus tahun 2017, sedangkan harga penutupan terendahnya yaitu Rp855,00 pada bulan April 2005, dengan nilai rata-ratanya sebesar Rp2.636,00. Terjadi tren menurun yang terlihat signifikan pada awal tahun 2020, hal ini disebabkan oleh adanya pandemi COVID-19 yang hampir membuat semua harga saham mengalami penurunan.
-2. Proses analisis data runtun waktu dilakukan pada data yang stasioner, yang mana memerlukan suatu transformasi variabel (differencing), selanjutnya dilakukan langkah spesifikasi model dan diagnostik model untuk mendapatkan model terbaik untuk data harga penutupan saham PT. Telkom Indonesia (Persero) Tbk [TLKM].
-3. Model runtun waktu terbaik untuk memprediksi harga penutupan saham Telkom Indonesia (Persero) Tbk [TLKM] per bulan adalah
-$$\nabla Y_t = \nabla Y_{t-1} + e_t$$
-di mana $\nabla Y_t$ adalah first difference harga penutupan saham TLKM pada bulan ke-t dan bulan ke-(t-1).
-4. Hasil peramalan yang diperoleh pada data harga penutupan saham (Closing Price) PT. Telkom Indonesia (Persero) Tbk [TLKM] dapat diperoleh dengan model ARIMA(0,1,0) yang telah didapatkan. Sehingga hasil peramalan yang diperoleh untuk 4 bulan kedepan adalah konstan yakni sebesar Rp3.970,00.
+2. Proses analisis data runtun waktu dilakukan pada data yang stasioner, yang mana memerlukan suatu transformasi variabel (<i>differencing</i>), selanjutnya dilakukan langkah spesifikasi model dan diagnostik model untuk mendapatkan model terbaik untuk data harga penutupan saham PT. Telkom Indonesia (Persero) Tbk [TLKM].
+3. Model runtun waktu terbaik untuk memprediksi harga penutupan saham Telkom Indonesia (Persero) Tbk [TLKM] per bulan adalah $\nabla Y_t = \nabla Y_{t-1} + e_t$ di mana $\nabla Y_t$ adalah <i>first difference</i> harga penutupan saham TLKM pada bulan ke-$t$ dan bulan ke-($t-1$).
+4. Hasil peramalan yang diperoleh pada data harga penutupan saham (<i>Closing Price</i>) PT. Telkom Indonesia (Persero) Tbk [TLKM] dapat diperoleh dengan model $ARIMA(0,1,0)$ yang telah didapatkan. Sehingga hasil peramalan yang diperoleh untuk 4 bulan kedepan adalah konstan yakni sebesar Rp3.970,00.
 
 ## Saran ##
 Meskipun telah didapatkan model ARIMA yang cukup baik akan tetapi masih terdapat beberapa penetapan dan keputusan yang sifatnya subjektif dan masih bisa diperbaiki lagi, misalnya terdapat beberapa model seasonal yang tidak dipertimbangkan dalam pemilihan model. Selain itu masih banyak faktor eksternal lain yang seharusnya ikut dipertimbangkan dalam pembentukan model lantaran subjek yang dibahas menyangkut harga saham sangat berhubungan dengan kondisi fundamental perusahaan, isu yang beredar di pasar, aksi korporasi perusahaan, adanya kepentingan dari investor tertentu, kondisi ekonomi seperti krisis, resesi atau pandemi serta kebijakan pemerintah.
 
 ## Sumber ##
-1. Awal, S. (2022, Desember 31). 6 Faktor Yang Mempengaruhi Harga Saham. Diambil kembali dari Stockbit Snips: https://snips.stockbit.com/investasi/faktor-yang-mempengaruhi-harga-saham
-2. Marzaen, M. Y. (2019). PENERAPAN FUZZY TIME SERIES-CHEN DALAM DATA HARGA PENUTUPAN SAHAM PT BANK NEGARA INDONESIA (Persero) Tbk. (IDX : BBNI). Yogyakarta: Universitas Islam Indonesia.
-3. PT Bursa Efek Indonesia. (t.thn.). Saham. Diambil kembali dari PT Bursa Efek Indonesia: https://www.idx.co.id/id/produk/saham
-4. Santosa, U. A. (7, Mei 2023). Mengenal Saham Telkomsel dan Rekam Jejak Perusahaan Induknya. Diambil kembali dari BMmoey: https://bmoney.id/blog/saham-tlkm-121449
-5. Telkom Indonesia. (t.thn.). Tentang Telkomgroup. Diambil kembali dari Telkom: https://www.telkom.co.id/sites/about-telkom/id_ID/page/profil-dan-riwayat-singkat-22
+1. Awal, S. (2022, Desember 31). <i>6 Faktor Yang Mempengaruhi Harga Saham</i>. Diambil kembali dari Stockbit Snips: https://snips.stockbit.com/investasi/faktor-yang-mempengaruhi-harga-saham
+2. Marzaen, M. Y. (2019). <i>PENERAPAN FUZZY TIME SERIES-CHEN DALAM DATA HARGA PENUTUPAN SAHAM PT BANK NEGARA INDONESIA (Persero) Tbk. (IDX : BBNI)</i>. Yogyakarta: Universitas Islam Indonesia.
+3. PT Bursa Efek Indonesia. (t.thn.). <i>Saham</i>. Diambil kembali dari PT Bursa Efek Indonesia: https://www.idx.co.id/id/produk/saham
+4. Santosa, U. A. (7, Mei 2023). <i>Mengenal Saham Telkomsel dan Rekam Jejak Perusahaan Induknya</i>. Diambil kembali dari BMmoey: https://bmoney.id/blog/saham-tlkm-121449
+5. Telkom Indonesia. (t.thn.). <i>Tentang Telkomgroup</i>. Diambil kembali dari Telkom: https://www.telkom.co.id/sites/about-telkom/id_ID/page/profil-dan-riwayat-singkat-22
