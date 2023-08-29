@@ -184,7 +184,7 @@ alternative hypothesis: stationary
 Warning message:
 In adf.test(fit$residuals) : p-value smaller than printed p-value
 ```
-Berdasarkan Uji Augmented Dickey-Fuller, dapat dilihat bahwa $p − value = 0.01 < 0.05$. Diambil keputusan untuk menolak $H_0$, sehingga disimpulkan data residual stasioner. Dari analisis ini dapat disimpulkan bahwa residual model runtun waktu $ARIMA (0,1,0)$ untuk data Harga Penutupan Saham TLKM stasioner dan independen.
+Berdasarkan Uji Augmented Dickey-Fuller, dapat dilihat bahwa $p − value = 0.01 < 0.05$. Diambil keputusan untuk menolak $H_0$, sehingga disimpulkan data residual stasioner. Dari analisis ini dapat disimpulkan bahwa residual model runtun waktu $ARIMA(0,1,0)$ untuk data Harga Penutupan Saham TLKM stasioner dan independen.
 
 #### 6.1.2. Uji Kenormalan Residual ####
 <p align="center">
