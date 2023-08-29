@@ -1,5 +1,5 @@
 # Time Series Analysis
-Time Series Analysis: Stock Forecasting PT. Telkom Indonesia (Persero) Tbk [TLKM] On October, 2004 – June 16, 2023, Using ARIMA Time Series Analysis (p,d,q)
+Time Series Analysis: Stock Forecasting PT. Telkom Indonesia (Persero) Tbk [TLKM] On October, 2004 – June 16, 2023, Using $ARIMA(p,d,q)$ Time Series Analysis
 
 > **Disclaimer :**
 > This project is for educational purposes.
@@ -57,7 +57,7 @@ Dickey-Fuller = -2.5957, Lag order = 6, p-value = 0.3258
 alternative hypothesis: stationary
 ```
 
-Berdasarkan Uji Augmented Dickey-Fuller, didapatkan $p − value = 0.3258 > 0.05$. Keputusan yang diambil adalah tidak menolak $H_0$ dan disimpulkan bahwa data observasi bersifat tidak stasioner, sehingga perlu dilakukan transformasi pada data dengan melakukan differencing terhadap data.
+Berdasarkan Uji Augmented Dickey-Fuller, didapatkan $p − value = 0.3258 > 0.05$. Keputusan yang diambil adalah tidak menolak $H_0$ dan disimpulkan bahwa data observasi bersifat tidak stasioner, sehingga perlu dilakukan transformasi pada data dengan melakukan <i>differencing</i> terhadap data.
 <p align="center">
   <img src="https://github.com/kmyafi/Time-Series-Analysis-Project/blob/ee46ceb67935d02359c9afc1fa2d5cd398370cad/Assets/Diff1.png">
   <br>
@@ -75,10 +75,10 @@ Warning message:
 In adf.test(diff_ts) : p-value smaller than printed p-value
 ```
 
-Berdasarkan **Gambar 2** secara subjektif data sudah terlihat stasioner. Berdasarkan Uji Augmented Dickey-Fuller didapatkan $p − value = 0.01 < 0.05$. Keputusan yang diambil adalah menolak $H_0$ dan disimpulkan bahwa data observasi hasil differencing bersifat stasioner.
+Berdasarkan **Gambar 2** secara subjektif data sudah terlihat stasioner. Berdasarkan Uji Augmented Dickey-Fuller didapatkan $p − value = 0.01 < 0.05$. Keputusan yang diambil adalah menolak $H_0$ dan disimpulkan bahwa data observasi hasil <i>differencing</i> bersifat stasioner.
 
 ## 4. Spesifikasi Model ##
-Pemilihan model akan dilakukan berdasarkan grafik ACF, PACF, dan EACF dari data hasil differencing.
+Pemilihan model akan dilakukan berdasarkan grafik ACF, PACF, dan EACF dari data hasil <i>differencing</i>.
 ### 4.1. ACF dan PACF ###
 <p align="center">
   <img src="https://github.com/kmyafi/Time-Series-Analysis-Project/blob/eda8d2830654919a1a3a202ebf1e642c592ef650/Assets/ACF%20PACF%20Diff1.png">
@@ -105,7 +105,7 @@ AR/MA
 Berdasarkan tabel EACF. terdapat tiga model yang akan menjadi kandidat, yaitu $ARIMA(0,1,0)$, $ARIMA(1,1,1)$, dan $ARIMA(0,1,2)$. Dari ketiga model tersebut akan diseleksi untuk memperoleh model terbaik.
 
 ## 5. Pemilihan Model Terbaik ##
-Pemilihan model terbaik akan didasari atas nilai Log-Likelihood terbesar, nilai Akaike Information Criterion (AIC) terkecil dan Bayesian Information Criterion (BIC) terkecil. Metode pemilihan dilakukan dengan cara pertama membuat semua model ARIMA yang menjadi kandidat model terbaik, kemudian membandingkan nilai Log- Likelihood, AIC, dan BIC.
+Pemilihan model terbaik akan didasari atas nilai <i>Log-Likelihood</i> terbesar, nilai <i>Akaike Information Criterion</i> (AIC) terkecil dan <i>Bayesian Information Criterion</i> (BIC) terkecil. Metode pemilihan dilakukan dengan cara pertama membuat semua model $ARIMA$ yang menjadi kandidat model terbaik, kemudian membandingkan nilai <i>Log-Likelihood</i>, AIC, dan BIC.
 ```
           model1     model2      model3     
 coef      numeric,0  numeric,3   numeric,3  
@@ -129,10 +129,10 @@ x         ts,225     ts,225      ts,225
 fitted    numeric,0  ts,225      ts,225
 ```
 
-Didapatkan model 1 merupakan model yang memiliki nilai AIC terkecil, BIC terkecil, dan Log-Likelihood terkecil. Maka, model $ARIMA(0,1,0)$ adalah model terbaik yang akan digunakan.
+Didapatkan model 1 merupakan model yang memiliki nilai AIC terkecil, BIC terkecil, dan <i>Log-Likelihood</i> terkecil. Maka, model $ARIMA(0,1,0)$ adalah model terbaik yang akan digunakan.
 
 ## 5. Estimasi Parameter ##
-Metode estimasi parameter yang digunakan untuk data harga penutupan saham TLKM adalah penggunaan conditional sum of square untuk menentukan nilai awal kemudian diestimasi dengan memanfaatkan metode maximum-likelihood (CSS-ML).
+Metode estimasi parameter yang digunakan untuk data harga penutupan saham TLKM adalah penggunaan <i>conditional sum of square</i> untuk menentukan nilai awal kemudian diestimasi dengan memanfaatkan metode <i>maximum-likelihood</i> (CSS-ML).
 ```
 Series: tf_ts 
 ARIMA(0,1,0) 
@@ -143,7 +143,6 @@ AIC=-79.83   AICc=-79.82   BIC=-76.42
 
 Diperoleh estimasi yang dapat diekspresikan sebagai berikut:
 $$\sigma_\epsilon^2 = 0.04063$$
-
 $$\nabla Y_t = e_t$$
 
 ## 6. Model Diagnostik ##
@@ -163,7 +162,7 @@ Secara subjektif dari Gambar 4, dapat dilihat bahwa plot yang dihasilkan stasion
   <i>Gambar 5 Plot ACF Residual Model $ARIMA(0,1,0)$ Harga Penutupan Saham TLKM</i>
 </p>
 
-Berdasarkan Gambar 5, autokorelasi lag-k dikatakan tidak berbeda signifikan dari 0 apabila tidak melewati garis putus-putus. Dapat dilihat bahwa seluruh nilai autokorelasi hingga lag-36 tidak melewati garis putus-putus tersebut. Sehingga dari hasil ini dapat dikatakan bahwa autokorelasi dari residual model $ARIMA(0,1,0)$ untuk data harga penutupan saham tidak berbeda signifikan dari 0 dan memenuhi salah satu syarat kestasioneran data runtun waktu
+Berdasarkan Gambar 5, autokorelasi lag- $k$ dikatakan tidak berbeda signifikan dari 0 apabila tidak melewati garis putus-putus. Dapat dilihat bahwa seluruh nilai autokorelasi hingga lag- $36$ tidak melewati garis putus-putus tersebut. Sehingga dari hasil ini dapat dikatakan bahwa autokorelasi dari residual model $ARIMA(0,1,0)$ untuk data harga penutupan saham tidak berbeda signifikan dari 0 dan memenuhi salah satu syarat kestasioneran data runtun waktu
 
 ```
 	Ljung-Box test
@@ -173,7 +172,7 @@ Q* = 27.77, df = 24, p-value = 0.2698
 
 Model df: 0.   Total lags used: 24
 ```
-Berdasarkan Uji Ljung-Box, dapat dilihat bahwa $p − value = 0.2698 > 0.05$. Diambil keputusan untuk tidak menolak $H_0$, sehingga disimpulkan data residual $\forall \rho_k = 0$ (residual saling independen, dikarenakan nilai autokorelasinya yang tidak berbeda signifikan dengan 0).
+Berdasarkan Uji Ljung-Box, dapat dilihat bahwa $p − value = 0.2698 > 0.05$. Diambil keputusan untuk tidak menolak $H_0$, sehingga disimpulkan data residual $\forall \rho_k = 0$ (residual saling independen, dikarenakan nilai autokorelasinya yang tidak berbeda signifikan dengan $0$).
 
 ```
 	Augmented Dickey-Fuller Test
@@ -211,8 +210,8 @@ X-squared = 4.222, df = 2, p-value = 0.1211
 ```
 Dengan menggunakan taraf signifikansi sebesar $5%$, dapat dilihat bahwa $p − value = 0.1211 > 0.05$ maka $H_0$ gagal ditolak dan dapat disimpulkan dari aturan keputusan bahwa data residual berdistribusi Normal.
 
-### 6.2. Overfitting ###
-Pada kasus ini, overfitting akan dilakukan dengan mengajukan model $ARIMA (0,1,1)$ dan $ARIMA (1,1,0)$. Model $ARIMA (0,1,0)$ didefinisikan sebagai fit, model $ARIMA (0,1,1)$ didefinisikan sebagai overfit1, dan model $ARIMA (1,1,0)$ didefinisikan sebagai overfit2. Akan dibandingkan ketiga model sebagai berikut.
+### 6.2. <i>Overfitting</i> ###
+Pada kasus ini, <i>overfitting</i> akan dilakukan dengan mengajukan model $ARIMA (0,1,1)$ dan $ARIMA (1,1,0)$. Model $ARIMA (0,1,0)$ didefinisikan sebagai fit, model $ARIMA (0,1,1)$ didefinisikan sebagai `overfit1`, dan model $ARIMA (1,1,0)$ didefinisikan sebagai `overfit2`. Akan dibandingkan ketiga model sebagai berikut.
 
 ```
           fit        overfit1    overfit2   
@@ -235,13 +234,13 @@ bic       -76.4225   -71.23499   -71.1766
 x         ts,225     ts,225      ts,225     
 fitted    ts,225     ts,225      ts,225 
 ```
-Kriteria overfiting akan digunakan dengan membandingkan nilai log-likelihood, AIC, dan BIC. Berdasarkan hasil di atas, dapat dilihat bahwa model $ARIMA(0,1,0)$ memiliki nilai AIC dan BIC yang paling kecil jika dibandingkan dengan model overfiting. Sementara itu, nilai log-likelihood yang didapat dari model $ARIMA(0,1,0)$ merupakan yang paling kecil, namun nilainya tidak berbeda terlalu signifikan dengan model overfit.
+Kriteria <i>overfitting</i> akan digunakan dengan membandingkan nilai log-likelihood, AIC, dan BIC. Berdasarkan hasil di atas, dapat dilihat bahwa model $ARIMA(0,1,0)$ memiliki nilai AIC dan BIC yang paling kecil jika dibandingkan dengan model <i>overfitting</i>. Sementara itu, nilai <i>log-likelihood</i> yang didapat dari model $ARIMA(0,1,0)$ merupakan yang paling kecil, namun nilainya tidak berbeda terlalu signifikan dengan model <i>overfit</i>.
 
-Sehingga dapat disimpulkan model fit $ARIMA(0,1,0)$ merupakan model terbaik yang akan digunakan untuk memprediksi Saham TLKM. Untuk memperkuat pernyataan ini, dapat dilakukan uji koefisien antara model fit dan overfit. Namun, kami tidak dapat dilakukan uji koefisien karena model random walk tidak memuat koefisien.
+Sehingga dapat disimpulkan model fit $ARIMA(0,1,0)$ merupakan model terbaik yang akan digunakan untuk memprediksi Harga Penutupan Saham TLKM. Untuk memperkuat pernyataan ini, dapat dilakukan uji koefisien antara model <i>fit</i> dan <i>overfit</i>. Namun, kami tidak dapat dilakukan uji koefisien karena model <i>random walk</i> tidak memuat koefisien.
 
 ## 7. Peramalan (Forecasting) ##
 ### 7.1. Ex Post ###
-Akan dilihat akurasi forecast dengan metode cross validation. Metode cross validation membagi data menjadi dua, yaitu data train dan data test. Data train (Oktober 2004 – Februari 2023) adalah data yang digunakan umtuk membentuk model, sedangkan data test (Maret 2023 – Juni 2023) adalah data yang digunakan sebagai pembanding dengan hasil forecast yang dimiliki.
+Akan dilihat akurasi <i>forecast</i> dengan metode <i>cross validation</i>. Metode <i>cross validation</i> membagi data menjadi dua, yaitu data <i>train</i> dan data <i>test</i>. Data <i>train</i> (Oktober 2004 – Februari 2023) adalah data yang digunakan untuk membentuk model, sedangkan data <i>test</i> (Maret 2023 – Juni 2023) adalah data yang digunakan sebagai pembanding dengan hasil <i>forecast</i> yang dimiliki.
 
 ```
          test forecast_train.Point Forecast forecast_train.Lo 80 forecast_train.Hi 80
