@@ -162,6 +162,7 @@ Secara subjektif dari Gambar 4, dapat dilihat bahwa plot yang dihasilkan stasion
   <br>
   <i>Gambar 5 Plot ACF Residual Model $ARIMA(0,1,0)$ Harga Penutupan Saham TLKM</i>
 </p>
+
 Berdasarkan Gambar 5, autokorelasi lag−$k$ dikatakan tidak berbeda signifikan dari 0 apabila tidak melewati garis putus-putus. Dapat dilihat bahwa seluruh nilai autokorelasi hingga lag−$36$ tidak melewati garis putus-putus tersebut. Sehingga dari hasil ini dapat dikatakan bahwa autokorelasi dari residual model $ARIMA(0,1,0)$ untuk data harga penutupan saham tidak berbeda signifikan dari 0 dan memenuhi salah satu syarat kestasioneran data runtun waktu
 
 ```
